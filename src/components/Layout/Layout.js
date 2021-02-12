@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import logo from 'assets/images/trella-logo-white.png';
 import shape4w from 'assets/images/shape-4-w.png';
 import shape2w from 'assets/images/shape-2-w.png';
@@ -30,5 +31,9 @@ function Layout({ children }) {
     </div>
   );
 }
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Layout;
