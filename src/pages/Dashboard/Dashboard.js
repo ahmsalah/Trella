@@ -8,10 +8,8 @@ import FlexBox from 'components/FlexBox/FlexBox';
 import ShipmentCard from 'components/ShipmentCard/ShipmentCard';
 import useInfiniteScroll from 'utils/hooks/useInfiniteScroll';
 import Loading from 'components/Loading/Loading';
-import useStyles from './styles';
 
 function Dashboard() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const { list, loading } = useSelector(state => state.shipments);
 
@@ -30,9 +28,11 @@ function Dashboard() {
 
   return (
     <Layout>
-      <Typography variant="h4" className={classes.title}>
-        All Shipments
-      </Typography>
+      <FlexBox mb={6} color="#fff">
+        <Typography variant="h4" color="inherit">
+          <b> All Shipments</b>
+        </Typography>
+      </FlexBox>
       <Loading isLoading={loading} />
       <FlexBox>
         <Grow in={!loading} timeout={800}>
