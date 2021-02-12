@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -50,4 +51,13 @@ function Modal({ open, onClose, onProceed, title, onProceedLabel, children }) {
   );
 }
 
-export default Modal;
+Modal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func,
+  onProceed: PropTypes.func,
+  title: PropTypes.string,
+  onProceedLabel: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+export default memo(Modal);
