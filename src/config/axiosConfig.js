@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as Sentry from '@sentry/react';
 
 const baseURL = process.env.REACT_APP_API_BASEURL;
 const Authorization = process.env.REACT_APP_API_AUTHORIZATION_EMAIL;
@@ -17,5 +18,20 @@ instance.interceptors.request.use(config => {
     },
   };
 });
+
+instance.interceptors.response.use(
+  response => response,
+  error => {
+    // Send the error to sentry
+    Sentry.captureException(error, {
+      extra: {
+        // with any extra details
+        error_response: error.response,
+      },
+    });
+
+    return Promise.reject(error.message);
+  },
+);
 
 export default instance;
