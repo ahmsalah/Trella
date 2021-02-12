@@ -55,7 +55,7 @@ Modal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
   onProceed: PropTypes.func,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   onProceedLabel: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
