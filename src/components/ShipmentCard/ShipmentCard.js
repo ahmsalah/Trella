@@ -1,4 +1,5 @@
 import React, { memo, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import CardWrapper from 'components/CardWrapper/CardWrapper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -101,5 +102,14 @@ const ShipmentCard = forwardRef(
     );
   },
 );
+
+ShipmentCard.propTypes = {
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  commodity: PropTypes.string,
+  vehicleType: PropTypes.string,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  defaultExpanded: PropTypes.bool,
+  addresses: PropTypes.array,
+};
 
 export default memo(ShipmentCard);

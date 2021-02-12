@@ -5,6 +5,7 @@ import { loadShipments } from 'redux/features/shipments.feature';
 import Typography from '@material-ui/core/Typography';
 import Grow from '@material-ui/core/Grow';
 import FlexBox from 'components/FlexBox/FlexBox';
+import ShipmentCard from 'components/ShipmentCard/ShipmentCard';
 import useInfiniteScroll from 'utils/hooks/useInfiniteScroll';
 import Loading from 'components/Loading/Loading';
 import useStyles from './styles';
@@ -37,9 +38,12 @@ function Dashboard() {
         <Grow in={!loading} timeout={800}>
           <div>
             {list?.slice(0, itemsCount).map((shipment, i, arr) => (
-              <h1 key={i} ref={i === arr.length - 1 ? lastElementRef : null}>
-                i
-              </h1>
+              <ShipmentCard
+                key={shipment.id}
+                defaultExpanded={arr < 4}
+                ref={i === arr.length - 1 ? lastElementRef : null}
+                {...shipment}
+              />
             ))}
           </div>
         </Grow>
