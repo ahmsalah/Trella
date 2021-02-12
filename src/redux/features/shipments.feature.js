@@ -2,6 +2,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import API from 'config/axiosConfig';
 import snackbar from 'utils/snackbar';
+import { initialLocation } from 'config/constants';
 
 /**
  * The way how redux store is structured here is by using the ducks pattern,
@@ -43,12 +44,20 @@ export default createReducer(initialState, {
 /* Sagas */
 function* handleLoadShipments({ payload }) {
   try {
-    /**
-     * if loadShipments action was dispatced without payload object ({lat, lng}), so that payload = undefined
-     * then fetchShipments would be called without params to fetch all shipments
-     */
-    const resp = yield call(fetchShipments, payload ?? {});
-    yield put(receivedShipments(resp.data));
+    // if loadShipments action was dispatced without payload object ({lat, lng}), so that payload = undefined
+    // then fetchShipments would be called without params to fetch all shipments
+    const { data } = yield call(fetchShipments, payload ?? {});
+
+    // -- Changing all shipments pickup lat & lng to Cairo's lat & lng --
+    const { lat: latitude, lng: longitude } = initialLocation;
+    // Destructuring pickup & destination from addresses array,
+    // then updating pickup, and leaving destination the same
+    const shipments = data.map(({ addresses: [pickup, destination], ...shipment }) => ({
+      ...shipment,
+      addresses: [{ ...pickup, latitude, longitude }, destination],
+    }));
+
+    yield put(receivedShipments(shipments));
   } catch (error) {
     /**
      * All errors are sent to sentry via axios interceptors
