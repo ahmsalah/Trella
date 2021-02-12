@@ -28,7 +28,12 @@ EmbeddedMap.defaultProps = {
 EmbeddedMap.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   mapMode: PropTypes.string,
-  mapParams: PropTypes.object.isRequired,
+  mapParams: PropTypes.shape({
+    origin: PropTypes.string.isRequired,
+    destination: PropTypes.string.isRequired,
+    maptype: PropTypes.string,
+    mode: PropTypes.string,
+  }).isRequired,
 };
 
 export default memo(EmbeddedMap);
