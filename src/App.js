@@ -1,10 +1,11 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from 'theme';
 import ErrorBoundary from 'utils/ErrorBoundary';
 import NoConnection from 'utils/NoConnection';
 import { Snackbar } from 'utils/snackbar';
+import theme from 'theme';
+import Routes from 'routes';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <CssBaseline />
         <NoConnection />
         <ErrorBoundary>
-          <h1>Weeeeee!</h1>
+          <Routes />
         </ErrorBoundary>
       </Snackbar>
     </ThemeProvider>
