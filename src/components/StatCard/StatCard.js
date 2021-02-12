@@ -46,7 +46,7 @@ StatCard.propTypes = {
   variant: PropTypes.oneOf(['vertical', 'horizontal']),
   title: PropTypes.string.isRequired,
   icon: PropTypes.node.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.string]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClick: PropTypes.func,
   className: PropTypes.string,
 };
