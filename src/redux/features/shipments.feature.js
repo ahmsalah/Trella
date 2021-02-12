@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import API from 'config/axiosConfig';
 import snackbar from 'utils/snackbar';
 import { initialLocation } from 'config/constants';
@@ -42,8 +42,15 @@ export default createReducer(initialState, {
 });
 
 /* Sagas */
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
+
 function* handleLoadShipments({ payload }) {
   try {
+    // This is so that you can enjoy the truck loading initally :D, This would be removed in production
+    if (yield select(({ shipments: { list, loading } }) => !list.length && loading)) {
+      yield call(delay, 3000);
+    }
+
     // if loadShipments action was dispatced without payload object ({lat, lng}), so that payload = undefined
     // then fetchShipments would be called without params to fetch all shipments
     const { data } = yield call(fetchShipments, payload ?? {});
