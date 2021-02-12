@@ -9,6 +9,7 @@ import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
 import LocationOnRoundedIcon from '@material-ui/icons/LocationOnRounded';
 import numeral from 'numeral';
 import StatCard from 'components/StatCard/StatCard';
+import EmbeddedMap from 'components/EmbeddedMap/EmbeddedMap';
 import FlexBox from 'components/FlexBox/FlexBox';
 import useStyles from './styles';
 
@@ -86,8 +87,15 @@ const ShipmentCard = forwardRef(
               </Typography>
             </FlexBox>
           </FlexBox>
-
-          {/* Map goes here */}
+          <EmbeddedMap
+            height={300}
+            mapParams={{
+              origin: `${pickup.latitude},${pickup.longitude}`,
+              destination: `${destination.latitude},${destination.longitude}`,
+              maptype: 'roadmap',
+              mode: 'driving',
+            }}
+          />
         </FlexBox>
       </CardWrapper>
     );
