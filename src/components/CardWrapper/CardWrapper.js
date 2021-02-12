@@ -9,6 +9,13 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './styles';
 
+/**
+ * The Purpose of this component is that if we have multiple lists,
+ * their design should be consistent.
+ * So if we have another orders list for example,
+ * each card should also be wrapped inside this component.
+ */
+
 const CardWrapper = forwardRef(
   ({ title, subheader, actions, children, defaultExpanded, className }, ref) => {
     const classes = useStyles();
