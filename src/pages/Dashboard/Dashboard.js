@@ -1,13 +1,12 @@
-import Layout from 'components/Layout/Layout';
 import React, { useEffect } from 'react';
+import Layout from 'components/Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadShipments } from 'redux/features/shipments.feature';
-import Typography from '@material-ui/core/Typography';
 import Grow from '@material-ui/core/Grow';
 import FlexBox from 'components/FlexBox/FlexBox';
 import ShipmentCard from 'components/ShipmentCard/ShipmentCard';
 import useInfiniteScroll from 'utils/hooks/useInfiniteScroll';
-import Loading from 'components/Loading/Loading';
+import DashboardHeader from 'components/DashboardHeader/DashboardHeader';
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -24,30 +23,25 @@ function Dashboard() {
     listLength: list?.length,
   });
 
-  console.log({ list, loading });
+  /**
+   * To do: handle empty state
+   */
 
   return (
     <Layout>
-      <FlexBox mb={6} color="#fff">
-        <Typography variant="h4" color="inherit">
-          <b> All Shipments</b>
-        </Typography>
-      </FlexBox>
-      <Loading isLoading={loading} />
-      <FlexBox>
-        <Grow in={!loading} timeout={800}>
-          <div>
-            {list?.slice(0, itemsCount).map((shipment, i, arr) => (
-              <ShipmentCard
-                key={shipment.id}
-                defaultExpanded={arr < 4}
-                ref={i === arr.length - 1 ? lastElementRef : null}
-                {...shipment}
-              />
-            ))}
-          </div>
-        </Grow>
-      </FlexBox>
+      <DashboardHeader loading={loading} />
+      <Grow in={!loading} timeout={{ enter: 800, exit: 0 }}>
+        <FlexBox>
+          {list?.slice(0, itemsCount).map((shipment, i, arr) => (
+            <ShipmentCard
+              key={shipment.id}
+              defaultExpanded={arr.length < 4 && i === 0}
+              ref={i === arr.length - 1 ? lastElementRef : null}
+              {...shipment}
+            />
+          ))}
+        </FlexBox>
+      </Grow>
     </Layout>
   );
 }
