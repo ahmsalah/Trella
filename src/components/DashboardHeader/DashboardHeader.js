@@ -12,14 +12,15 @@ import Loading from 'components/Loading/Loading';
 import PublicRoundedIcon from '@material-ui/icons/PublicRounded';
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import Modal from 'components/Modal/Modal';
+import InteractiveMap from 'components/InteractiveMap/InteractiveMap';
 import { initialLocation } from 'config/constants';
 
 function DashboardHeader({ loading }) {
   const dispatch = useDispatch();
   const up600 = useMediaQuery('(min-width:600px)');
   const [filteredView, setFilteredView] = useState(false);
-  const [address] = useState(false);
-  const [coordinates] = useState(initialLocation);
+  const [address, setAddress] = useState(false);
+  const [coordinates, setCoordinates] = useState(initialLocation);
 
   const [open, setOpen] = useState(false);
 
@@ -89,7 +90,11 @@ function DashboardHeader({ loading }) {
           </>
         }
       >
-        <h1>Map goes here</h1>
+        <InteractiveMap
+          setAddress={setAddress}
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+        />
       </Modal>
     </>
   );
@@ -98,4 +103,5 @@ function DashboardHeader({ loading }) {
 DashboardHeader.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
+
 export default DashboardHeader;
