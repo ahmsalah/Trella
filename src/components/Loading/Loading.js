@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FlexBox from 'components/FlexBox/FlexBox';
 import Lottie from 'react-lottie';
 import animationData from 'assets/lottie/truck.json';
@@ -21,5 +22,9 @@ function Loading({ isLoading, ...more }) {
     )
   );
 }
+
+Loading.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default Loading;

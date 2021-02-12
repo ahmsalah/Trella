@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 
 function FlexBox({ children, row, wrap, ai, jc, ...more }) {
@@ -19,6 +20,14 @@ function FlexBox({ children, row, wrap, ai, jc, ...more }) {
 FlexBox.defaultProps = {
   ai: 'stretch',
   jc: 'flex-start',
+};
+
+FlexBox.propTypes = {
+  children: PropTypes.node.isRequired,
+  ai: PropTypes.string,
+  jc: PropTypes.string,
+  row: PropTypes.bool,
+  wrap: PropTypes.bool,
 };
 
 export default FlexBox;
