@@ -33,7 +33,7 @@ EmbeddedMap.propTypes = {
     destination: PropTypes.string.isRequired,
     maptype: PropTypes.string,
     mode: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default memo(EmbeddedMap);
