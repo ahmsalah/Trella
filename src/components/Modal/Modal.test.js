@@ -12,7 +12,7 @@ test('modal shows the children and a close button', () => {
   );
   screen.getByText(/test/i);
 
-  user.click(screen.getByText(/Cancel/i));
+  user.click(screen.getByText(/Close/i));
 
   expect(handleClose).toHaveBeenCalledTimes(1);
 });
