@@ -19,7 +19,7 @@ export default makeStyles(
       minWidth: 92,
       border: '1px solid',
       borderColor,
-      boxShadow: mixins.boxShadows.primary.light,
+      boxShadow: mixins.boxShadows?.primary?.light,
     },
     buttonBase: {
       borderRadius,
