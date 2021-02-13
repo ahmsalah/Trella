@@ -21,7 +21,12 @@ const CardWrapper = forwardRef(
     const classes = useStyles();
 
     return (
-      <Accordion ref={ref} defaultExpanded={defaultExpanded} className={className}>
+      <Accordion
+        ref={ref}
+        defaultExpanded={defaultExpanded}
+        TransitionProps={{ mountOnEnter: true }}
+        className={className}
+      >
         <AccordionSummary
           expandIcon={
             <Tooltip title="Expand" placement="top" arrow>
