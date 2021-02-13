@@ -17,14 +17,14 @@ import useStyles from './styles';
  */
 
 const CardWrapper = forwardRef(
-  ({ title, subheader, actions, children, defaultExpanded, className }, ref) => {
+  ({ title, subheader, actions, children, defaultExpanded, TransitionProps, className }, ref) => {
     const classes = useStyles();
 
     return (
       <Accordion
         ref={ref}
+        TransitionProps={TransitionProps}
         defaultExpanded={defaultExpanded}
-        TransitionProps={{ mountOnEnter: true }}
         className={className}
       >
         <AccordionSummary
@@ -61,6 +61,10 @@ CardWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   defaultExpanded: PropTypes.bool,
   className: PropTypes.string,
+  TransitionProps: PropTypes.shape({
+    mountOnEnter: PropTypes.bool,
+    unmountOnExit: PropTypes.bool,
+  }),
 };
 
 export default memo(CardWrapper);

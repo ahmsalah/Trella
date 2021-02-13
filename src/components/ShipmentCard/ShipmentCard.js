@@ -39,9 +39,9 @@ const ShipmentCard = forwardRef(
         icon: <MoneyRoundedIcon />,
         value: `${numeral(price).format('0,0')} EGP`,
       },
-    ];
+    ].filter(item => item.value);
 
-    const [pickup, destination] = addresses;
+    const [pickup, destination] = addresses || [];
     return (
       <CardWrapper
         ref={ref}
@@ -59,6 +59,7 @@ const ShipmentCard = forwardRef(
             Assign
           </Button>
         }
+        TransitionProps={{ mountOnEnter: true }}
       >
         <div className={classes.grid}>
           {stats.map(stat => (
@@ -74,7 +75,7 @@ const ShipmentCard = forwardRef(
                 Pickup
               </Typography>
               <Typography align="center">
-                <b>{pickup.name}</b>
+                <b>{pickup?.name}</b>
               </Typography>
             </FlexBox>
 
@@ -84,15 +85,15 @@ const ShipmentCard = forwardRef(
                 Destination
               </Typography>
               <Typography align="center">
-                <b>{destination.name}</b>
+                <b>{destination?.name}</b>
               </Typography>
             </FlexBox>
           </FlexBox>
           <EmbeddedMap
             height={300}
             mapParams={{
-              origin: `${pickup.latitude},${pickup.longitude}`,
-              destination: `${destination.latitude},${destination.longitude}`,
+              origin: `${pickup?.latitude},${pickup?.longitude}`,
+              destination: `${destination?.latitude},${destination?.longitude}`,
               maptype: 'roadmap',
               mode: 'driving',
             }}
@@ -102,6 +103,8 @@ const ShipmentCard = forwardRef(
     );
   },
 );
+
+ShipmentCard.displayName = 'ShipmentCard';
 
 ShipmentCard.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

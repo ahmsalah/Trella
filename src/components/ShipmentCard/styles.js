@@ -12,7 +12,7 @@ export default makeStyles(({ spacing, mixins, palette, shape: { borderRadius } }
     border: '1px solid',
     borderColor: palette.borderColor,
     borderRadius,
-    boxShadow: mixins.boxShadows.primary.light,
+    boxShadow: mixins.boxShadows?.primary?.light,
     '& .MuiSvgIcon-root': {
       marginBottom: spacing(0.5),
       color: palette.secondary.light,
