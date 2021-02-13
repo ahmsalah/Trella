@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import ObjectToQueryString from 'utils/helperFns/ObjectToQueryString';
 
 function EmbeddedMap({ height, mapMode, mapParams, ...more }) {
-  const key = process.env.REACT_APP_GOOGLE_MAPS_EMBEDDED_KEY;
+  const key = process.env.REACT_APP_GOOGLE_JS_KEY;
 
   const queryString = ObjectToQueryString({ key, ...mapParams });
 
