@@ -12,8 +12,8 @@ import useStyles from './styles';
 /**
  * The Purpose of this component is that if we have multiple lists,
  * their design should be consistent.
- * So if we have another orders list for example,
- * each card should also be wrapped inside this component.
+ * So if we have another list, orders list for example,
+ * then the cards of this list should also be wrapped inside this component.
  */
 
 const CardWrapper = forwardRef(
