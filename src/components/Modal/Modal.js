@@ -39,7 +39,7 @@ function Modal({ open, onClose, onProceed, title, onProceedLabel, children }) {
           color="secondary"
           variant="text"
         >
-          Cancel
+          Close
         </Button>
         {onProceed && (
           <Button size="large" autoFocus onClick={onProceed} variant="contained" color="secondary">
