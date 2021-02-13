@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Layout from 'components/Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadShipments } from 'redux/features/shipments.feature';
-import Grow from '@material-ui/core/Grow';
-import FlexBox from 'components/FlexBox/FlexBox';
-import ShipmentCard from 'components/ShipmentCard/ShipmentCard';
-import useInfiniteScroll from 'utils/hooks/useInfiniteScroll';
 import DashboardHeader from 'components/DashboardHeader/DashboardHeader';
+import ShipmentsList from 'components/ShipmentsList/ShipmentsList';
+import Loading from 'components/Loading/Loading';
+import Modal from 'components/Modal/Modal';
+import InteractiveMap from 'components/InteractiveMap/InteractiveMap';
+import Box from '@material-ui/core/Box';
+import { initialLocation } from 'config/constants';
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -16,32 +18,53 @@ function Dashboard() {
     dispatch(loadShipments());
   }, [dispatch]);
 
-  const { lastElementRef, itemsCount } = useInfiniteScroll({
-    loading,
-    initialItemsCount: 4,
-    increaseBy: 1,
-    listLength: list?.length,
-  });
+  const [filteredView, setFilteredView] = useState(false);
+  const [address, setAddress] = useState('');
+  const [coordinates, setCoordinates] = useState(initialLocation);
+  const [open, setOpen] = useState(false);
 
-  /**
-   * To do: handle empty state
-   */
+  const loadAllShipments = useCallback(() => {
+    setFilteredView(false);
+    dispatch(loadShipments());
+  }, [dispatch]);
+
+  const loadShipmentsWithLocation = useCallback(() => {
+    setOpen(false);
+    dispatch(loadShipments(coordinates));
+    setFilteredView(true);
+  }, [dispatch, coordinates]);
 
   return (
     <Layout>
-      <DashboardHeader loading={loading} />
-      <Grow in={!loading} timeout={{ enter: 800, exit: 0 }}>
-        <FlexBox>
-          {list?.slice(0, itemsCount).map((shipment, i, arr) => (
-            <ShipmentCard
-              key={shipment.id}
-              defaultExpanded={arr.length < 4 && i === 0}
-              ref={i === arr.length - 1 ? lastElementRef : null}
-              {...shipment}
-            />
-          ))}
-        </FlexBox>
-      </Grow>
+      <DashboardHeader
+        loading={loading}
+        filteredView={filteredView}
+        address={address}
+        loadAllShipments={loadAllShipments}
+        openLocationDialog={() => setOpen(true)}
+      />
+      <Loading isLoading={loading} mt={-12} />
+      <ShipmentsList loading={loading} list={list} />
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        onProceed={loadShipmentsWithLocation}
+        onProceedLabel="Select Location"
+        title={
+          <>
+            <Box component="span" fontWeight={400}>
+              View shipments near
+            </Box>{' '}
+            <b>{address}</b>
+          </>
+        }
+      >
+        <InteractiveMap
+          setAddress={setAddress}
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+        />
+      </Modal>
     </Layout>
   );
 }
