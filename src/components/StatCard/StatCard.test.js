@@ -8,6 +8,6 @@ test('StatCard renders with props', () => {
 });
 
 test('StatCard is a button when onClick is passed into it', () => {
-  render(<StatCard title="stat-title" value="stat-value" onClick={() => {}} />);
+  render(<StatCard title="stat-title" value="stat-value" onClick={jest.fn()} />);
   screen.getByRole('button');
 });

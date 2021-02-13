@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import user from '@testing-library/user-event';
 import Modal from './Modal';
 
 test('modal shows the children and a close button', () => {
@@ -11,7 +12,7 @@ test('modal shows the children and a close button', () => {
   );
   screen.getByText(/test/i);
 
-  fireEvent.click(screen.getByText(/Close/i));
+  user.click(screen.getByText(/Cancel/i));
 
   expect(handleClose).toHaveBeenCalledTimes(1);
 });
