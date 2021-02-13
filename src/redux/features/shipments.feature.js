@@ -12,14 +12,14 @@ import { initialLocation } from 'config/constants';
  */
 
 /* API calls */
-const fetchShipments = params => API.get('/marketplace', { params });
+export const fetchShipments = params => API.get('/marketplace', { params });
 
 /* Actions */
 export const loadShipments = createAction('shipments/loadShipments');
 export const receivedShipments = createAction('shipments/receivedShipments');
 
 /* Initial State */
-const initialState = {
+export const initialState = {
   loading: false,
   list: [],
 };
@@ -44,16 +44,16 @@ export default createReducer(initialState, {
 /* Sagas */
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
-function* handleLoadShipments({ payload }) {
+export function* handleLoadShipments(action) {
   try {
-    // This is so that you can enjoy the truck loading initally :D, This would be removed in production
+    // Testing the truck loading animation, This would be removed in production
     if (yield select(({ shipments: { list, loading } }) => !list.length && loading)) {
       yield call(delay, 3000);
     }
 
     // if loadShipments action was dispatced without payload object ({lat, lng}), so that payload = undefined
     // then fetchShipments would be called without params to fetch all shipments
-    const { data } = yield call(fetchShipments, payload ?? {});
+    const { data } = yield call(fetchShipments, action.payload ?? {});
 
     // -- Changing all shipments pickup lat & lng to Cairo's lat & lng --
     const { lat: latitude, lng: longitude } = initialLocation;
@@ -70,7 +70,8 @@ function* handleLoadShipments({ payload }) {
      * All errors are sent to sentry via axios interceptors
      * So we might do something with this error specifically here
      */
-    snackbar.error('Oops, Something went wrong while fetching shipments');
+    process.env.NODE_ENV !== 'test' &&
+      snackbar.error('Oops, Something went wrong while fetching shipments');
   }
 }
 
