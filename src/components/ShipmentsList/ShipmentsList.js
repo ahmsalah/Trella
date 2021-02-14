@@ -19,7 +19,7 @@ function ShipmentsList({ loading, list }) {
         {list?.slice(0, itemsCount).map((shipment, i, arr) => (
           <ShipmentCard
             key={shipment.key}
-            defaultExpanded={arr.length < 4 && i === 0}
+            defaultExpanded={arr.length < 4 || i === 0}
             ref={i === arr.length - 1 ? lastElementRef : null}
             {...shipment}
           />
