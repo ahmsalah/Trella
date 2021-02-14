@@ -141,6 +141,16 @@ And is completely responsive and adapts well to all viewports.
 
 ![shipments-phone](https://i.imgur.com/tyus0Em.png 'shipments-phone')
 
+---
+
+#### The design process started with low fidelity wireframes
+
+![wireframe1](https://i.imgur.com/B8tzGTr.png 'wireframe1')
+
+![wireframe2](https://i.imgur.com/F06WYIf.png 'wireframe2')
+
+#### Implementation
+
 ![filter-by-location](https://i.imgur.com/Jts0oSo.png 'filter-by-location')
 
 ![shipments-list](https://i.imgur.com/S8I7ote.png 'shipments-list')
