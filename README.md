@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# Trella Shipments Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Demo Here](https://trella-shipments.web.app)
 
-## Available Scripts
+This documentation covers
 
-In the project directory, you can run:
+- Get Started
+- File Structure
+- Stack
+- App Features
+- Redux Design Pattern
+- Theming
+- UI Design
+  - Design Philosophy
+  - Responsiveness
+  - Wireframes
 
-### `yarn start`
+## Get Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To get started you can run the app in development
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+git clone https://github.com/ahmsalah/Trella.git
+cd Trella
+yarn
+yarn start
+```
 
-### `yarn test`
+Launch the test runner
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+yarn test
+```
 
-### `yarn build`
+## File Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+📦src  
+ ┣ 📂assets  
+ ┣ 📂components  
+ ┃ ┣ 📂Component  
+ ┃ ┃ ┣ 📜Component.js  
+ ┃ ┃ ┣ 📜Component .test.js  
+ ┃ ┃ ┗ 📜styles.js  
+ ┣ 📂config  
+ ┃ ┣ 📜axiosConfig.js  
+ ┃ ┗ 📜sentry.js  
+ ┣ 📂pages  
+ ┃ ┗ 📂Dashboard  
+ ┃ ┃ ┗ 📜Dashboard.js  
+ ┣ 📂redux  
+ ┃ ┣ 📂features  
+ ┃ ┃ ┣ 📜index.js  
+ ┃ ┃ ┣ 📜shipments.feature.js  
+ ┃ ┃ ┗ 📜shipments.feature.test.js  
+ ┃ ┗ 📜store.js  
+ ┣ 📂routes  
+ ┣ 📂theme  
+ ┣ 📂utils  
+ ┃ ┣ 📂helperFns  
+ ┃ ┣ 📂hooks  
+ ┃ ┣ 📜ErrorBoundary.js  
+ ┃ ┣ 📜NoConnection.js  
+ ┃ ┗ 📜snackbar.js  
+ ┣ 📜App.js  
+ ┣ 📜index.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `assets`
+  images, fonts, ...etc
+- `components`
+  All components should be in one folder, with no nesting!
+  Each component has its own folder, it contains the jsx component itself as well as styles, tests, storybook, ...etc.
+- `config`
+  Configuration for axios, sentry, firebase, aws, other sdks, ...etc
+- `routes`
+  The index file should render all the routes, a paths file could be added as well as a privateRoute wrapper.
+- `pages`
+  A page is what simply what get passed to routes, each page folder should be same as a component folder
+- `theme`
+  Scroll below for more details about theming
+- `utils`
+  Error boundaries, offline internet connection detection, snackbar utilities
+  - `hooks`
+  - `helperFns`
+    utils also includes 2 other folders (custom hooks, and pure helper functions)
+- `redux`
+  Scroll below for more details about how redux is structured in this project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Stack
 
-### `yarn eject`
+This app is built with React.js, Redux , Redux-saga, Material-UI, Css-in-js, React-Testing-Library & Jest for testing.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Features
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- View all available shipments and assign each one to a driver
+- Each shipment card includes
+  - Commodity
+  - Truck Type
+  - Number Of Bids
+  - Pickup & destination addresses and their cutoff time & distance on a map
+- Filter shipments by location using google maps
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Redux design pattern
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+┣ 📂redux  
+ ┃ ┣ 📂features  
+ ┃ ┃ ┣ 📜index.js  
+ ┃ ┃ ┣ 📜shipments.feature.js  
+ ┃ ┃ ┗ 📜shipments.feature.test.js  
+ ┃ ┗ 📜store.js
 
-## Learn More
+The way how redux store is structured here is by using the ducks pattern recommended by [redux style guide](https://redux.js.org/style-guide/style-guide#structure-files-as-feature-folders-or-ducks).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> _Co-locating logic for a given feature in one place typically makes it easier to maintain that code. Because of this, **we recommend that most applications should structure files using a "feature folder" approach** (all files for a feature in the same folder) **or the ["ducks" pattern](https://github.com/erikras/ducks-modular-redux)** (all Redux logic for a feature in a single file), rather than splitting logic across separate folders by "type" of code (reducers, actions, etc)_
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The project's redux folder includes the store configuration and all the logic (api calls, actions, reducers and sagas) grouped by feature.
 
-### Code Splitting
+## Theming
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+┣ 📂theme  
+ ┃ ┣ 📜generic.theme.js  
+ ┃ ┣ 📜index.js  
+ ┃ ┣ 📜mixins.theme.js  
+ ┃ ┣ 📜muiDefaultProps.theme.js  
+ ┃ ┣ 📜muiStylesOverrides.theme.js  
+ ┃ ┣ 📜palette.theme.js  
+ ┃ ┗ 📜typography.theme.js
 
-### Analyzing the Bundle Size
+Allows for keeping consistency and easy customization for all design aspects of the app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Imagine that you have to update the border-radius of over a 100 components, instead it should be done with a single line of code.
 
-### Making a Progressive Web App
+Material-UI provides a greate api `ThemeProvider`, for customizing its own components or even changing their default props.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Customization here includes palette, typography, mixins, animation keyframes/transitions, shadows, spacing, breakpoints, border-radius and z-index. (This could be done without material-ui as well).
 
-### Advanced Configuration
+## UI Design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This app is built following [Material Design](https://material.io/design/introduction) Specifications.
 
-### Deployment
+And is completely responsive and adapts well to all viewports.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![shipments-phone](https://i.imgur.com/tyus0Em.png 'shipments-phone')
 
-### `yarn build` fails to minify
+![filter-by-location](https://i.imgur.com/Jts0oSo.png 'filter-by-location')
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![shipments-list](https://i.imgur.com/S8I7ote.png 'shipments-list')
