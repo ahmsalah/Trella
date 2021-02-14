@@ -145,9 +145,9 @@ And is completely responsive and adapts well to all viewports.
 
 #### The design process started with low fidelity wireframes
 
-![wireframe1](https://i.imgur.com/B8tzGTr.png 'wireframe1')
+![wireframe](https://i.imgur.com/ne7yPMd.png 'wireframe')
 
-![wireframe2](https://i.imgur.com/F06WYIf.png 'wireframe2')
+---
 
 #### Implementation
 
