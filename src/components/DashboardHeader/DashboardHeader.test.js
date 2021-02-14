@@ -5,7 +5,6 @@ test('filteredView is set to true and renders address', () => {
   render(<DashboardHeader loading={false} filteredView address="Cairo" />);
   screen.getByRole('button', { name: /All Shipments/i });
   screen.getByRole('button', { name: /Change Location/i });
-  screen.debug();
 
   expect(screen.getByText(/Viewing shipments near/i)).toHaveTextContent('Cairo');
 });
