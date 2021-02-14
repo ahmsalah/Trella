@@ -6,12 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import MoneyRoundedIcon from '@material-ui/icons/MoneyRounded';
 import GavelRoundedIcon from '@material-ui/icons/GavelRounded';
 import LocalShippingRoundedIcon from '@material-ui/icons/LocalShippingRounded';
-import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
 import LocationOnRoundedIcon from '@material-ui/icons/LocationOnRounded';
 import numeral from 'numeral';
 import StatCard from 'components/StatCard/StatCard';
 import EmbeddedMap from 'components/EmbeddedMap/EmbeddedMap';
 import FlexBox from 'components/FlexBox/FlexBox';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import { WoodLogsIcon } from 'assets/svgIcons';
 import useStyles from './styles';
 
 const ShipmentCard = forwardRef(
@@ -21,7 +22,11 @@ const ShipmentCard = forwardRef(
     const stats = [
       {
         title: 'Commodity',
-        icon: <CategoryRoundedIcon />,
+        icon: (
+          <SvgIcon>
+            <WoodLogsIcon />
+          </SvgIcon>
+        ),
         value: commodity,
       },
       {
