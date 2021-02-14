@@ -1,6 +1,6 @@
 # Trella Shipments Task
 
-[Live Demo Here](https://trella-shipments.web.app)
+[Live Demo Here](https://trella-shipments.firebaseapp.com/)
 
 This documentation covers
 
